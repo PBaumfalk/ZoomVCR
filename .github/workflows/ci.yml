@@ -1,0 +1,70 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+jobs:
+  backend:
+    name: Backend (pytest im Backend-Image)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Die Tests brauchen ffmpeg und Tesseract, also genau das Image, das auch produktiv läuft.
+      - name: Backend-Image bauen
+        run: docker build -t zoomvcr-backend backend
+      - name: pytest
+        run: |
+          docker run --rm -u root -v "$PWD":/repo -w /repo/backend -e PYTHONPATH=/repo/backend \
+            zoomvcr-backend sh -c 'pip install -q --root-user-action=ignore -r requirements-dev.txt && python -m pytest -q -p no:cacheprovider'
+
+  frontend:
+    name: Oberfläche (Typen und Build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npx tsc --noEmit
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+  images:
+    name: Images (web, desktop)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Oberflächen-Image bauen
+        run: docker build -t zoomvcr-web frontend
+      # Prüft, dass der aktuelle Zoom-Linux-Client und Firefox sich noch installieren lassen.
+      - name: Desktop-Image bauen
+        run: docker build -f desktop/Dockerfile -t zoomvcr-desktop .
+
+  docs:
+    name: Handbuch (Links und Anker)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: node scripts/docs/check-links.mjs

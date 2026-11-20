@@ -1,0 +1,29 @@
+# Hält GitHub-Actions, Python- und npm-Pakete und die Basis-Images aktuell.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: pip
+    directory: /backend
+    schedule:
+      interval: monthly
+    groups:
+      minor-und-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: monthly
+    groups:
+      minor-und-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: docker
+    directories: [/backend, /frontend, /desktop]
+    schedule:
+      interval: monthly

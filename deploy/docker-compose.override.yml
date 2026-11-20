@@ -1,0 +1,29 @@
+# Vorlage für den Betrieb hinter einem vorhandenen Reverse Proxy (Caddy, Traefik, nginx …).
+# Auf dem Server als compose.override.yml neben compose.yml ablegen; Docker Compose liest sie automatisch.
+# - kein eigener Caddy: der vorhandene Proxy im externen Docker-Netz "proxy" übernimmt TLS, Zugriffsbeschränkung und Routing
+#   (/api/* und /health → zoomvcr-api:8000, alles andere → zoomvcr-web:3000)
+# - nur web und api hängen am Netz proxy, Datenbank, Redis, Worker und Desktop bleiben intern
+# - init: true räumt Zombie-Prozesse ab
+# Heißt das Netz des Proxys anders, unten unter networks.proxy.name eintragen.
+services:
+  proxy:
+    profiles: ["aus"]
+  api:
+    container_name: zoomvcr-api
+    init: true
+    command: ["uvicorn", "zoomvcr.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--forwarded-allow-ips", "*"]
+    networks: [internal, proxy]
+  web:
+    container_name: zoomvcr-web
+    init: true
+    networks: [internal, proxy]
+  capture:
+    init: true
+  processor:
+    init: true
+  scheduler:
+    init: true
+networks:
+  proxy:
+    external: true
+    name: proxy

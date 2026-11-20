@@ -1,0 +1,13 @@
+{
+  "name": "zoomvcr-docs",
+  "private": true,
+  "description": "Werkzeuge für Handbuch und Bildschirmfotos. Die Anwendung selbst liegt in backend/ und frontend/.",
+  "type": "module",
+  "scripts": {
+    "docs:check": "node scripts/docs/check-links.mjs",
+    "docs:screenshots": "node scripts/docs/screenshots.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}

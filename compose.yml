@@ -1,0 +1,136 @@
+name: zoomvcr
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zoomvcr
+      POSTGRES_USER: zoomvcr
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set_POSTGRES_PASSWORD}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zoomvcr"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [internal]
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1"]
+    volumes: [redis_data:/data]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks: [internal]
+  api:
+    build: {context: ./backend, args: {LOCAL_ASR: "${ZOOMVCR_LOCAL_ASR:-false}"}}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ZOOMVCR_DATABASE_URL: postgresql+psycopg://zoomvcr:${POSTGRES_PASSWORD}@postgres:5432/zoomvcr
+      ZOOMVCR_REDIS_URL: redis://redis:6379/0
+    volumes: [recordings:/data/recordings, model_cache:/data/hf-cache]
+    command: ["uvicorn", "zoomvcr.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    networks: [internal]
+  capture:
+    build: {context: ./backend, args: {LOCAL_ASR: "${ZOOMVCR_LOCAL_ASR:-false}"}}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ZOOMVCR_DATABASE_URL: postgresql+psycopg://zoomvcr:${POSTGRES_PASSWORD}@postgres:5432/zoomvcr
+      ZOOMVCR_REDIS_URL: redis://redis:6379/0
+    volumes: [recordings:/data/recordings, model_cache:/data/hf-cache]
+    command: ["rq", "worker", "capture", "--url", "redis://redis:6379/0", "--path", "/app"]
+    depends_on: {api: {condition: service_healthy}}
+    networks: [internal]
+  processor:
+    build: {context: ./backend, args: {LOCAL_ASR: "${ZOOMVCR_LOCAL_ASR:-false}"}}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ZOOMVCR_DATABASE_URL: postgresql+psycopg://zoomvcr:${POSTGRES_PASSWORD}@postgres:5432/zoomvcr
+      ZOOMVCR_REDIS_URL: redis://redis:6379/0
+      HF_HOME: /data/hf-cache
+    volumes: [recordings:/data/recordings, model_cache:/data/hf-cache]
+    command: ["rq", "worker", "processing", "--url", "redis://redis:6379/0", "--path", "/app"]
+    depends_on: {api: {condition: service_healthy}}
+    networks: [internal]
+  scheduler:
+    build: {context: ./backend, args: {LOCAL_ASR: "${ZOOMVCR_LOCAL_ASR:-false}"}}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ZOOMVCR_DATABASE_URL: postgresql+psycopg://zoomvcr:${POSTGRES_PASSWORD}@postgres:5432/zoomvcr
+      ZOOMVCR_REDIS_URL: redis://redis:6379/0
+    volumes: [recordings:/data/recordings]
+    command: ["python", "-m", "zoomvcr.scheduler"]
+    depends_on: {api: {condition: service_healthy}}
+    networks: [internal]
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on: {api: {condition: service_healthy}}
+    networks: [internal]
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      ZOOMVCR_SITE: ${ZOOMVCR_SITE:-:80}
+    ports:
+      # Standard 80/443. Für einen Probelauf neben anderen Diensten z. B. ZOOMVCR_HTTP_PORT=8080 in .env.
+      - "${ZOOMVCR_HTTP_PORT:-80}:80"
+      - "${ZOOMVCR_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [web, api]
+    networks: [internal]
+  desktop:
+    profiles: ["zoom"]
+    build:
+      context: .
+      dockerfile: desktop/Dockerfile
+    restart: unless-stopped
+    init: true
+    shm_size: 1gb
+    env_file: .env
+    environment:
+      ZOOMVCR_STORAGE_ROOT: /data/recordings
+      # No GPU in the container: Zoom renders its Qt Quick UI through Mesa llvmpipe and burned ~3 CPU
+      # cores when idle (measured 07.11.2026). QT_QUICK_BACKEND=software is NOT an option (black window).
+      # Limit llvmpipe to one thread and use the basic render loop instead.
+      LP_NUM_THREADS: "1"
+      QSG_RENDER_LOOP: basic
+    volumes:
+      - recordings:/data/recordings
+      - zoom_profile:/home/zoomvcr
+    ports:
+      - "127.0.0.1:5900:5900"
+    healthcheck:
+      test: ["CMD", "/opt/agent/bin/python", "-c", "import os,socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1',8765)); s.close()"]
+      interval: 20s
+      timeout: 4s
+      retries: 5
+    networks: [internal]
+networks:
+  internal:
+volumes:
+  postgres_data:
+  redis_data:
+  recordings:
+  model_cache:
+  caddy_data:
+  caddy_config:
+  zoom_profile:

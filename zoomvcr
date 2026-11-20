@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+cd "$(dirname "$0")"
+# API container already has all Python dependencies.
+exec docker compose exec -T api python -m zoomvcr "$@"

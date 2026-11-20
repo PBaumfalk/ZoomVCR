@@ -1,0 +1,9 @@
+.git
+**/node_modules
+**/.next
+docs
+scripts
+.env
+.env.*
+!.env.example
+**/__pycache__
