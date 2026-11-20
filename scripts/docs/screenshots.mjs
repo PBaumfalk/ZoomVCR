@@ -112,7 +112,7 @@ for (const dark of [false, true]) {
     await page.keyboard.press('Escape');
     // Erster Ablauf: Testaufnahme planen
     await page.getByRole('button', { name: 'Aufnahme planen' }).first().click();
-    await page.locator('.modal input').first().fill('Testaufnahme Probelauf Kanzlei Muster');
+    await page.locator('.modal input').first().fill('Testaufnahme Probelauf');
     await page.locator('.modal details.more summary').click();
     await page.locator('.modal details.more select').selectOption('synthetic');
     await page.locator('.modal input[type=number]').fill('1');

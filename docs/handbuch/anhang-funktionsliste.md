@@ -2,14 +2,14 @@
 
 Alle Funktionen von ZoomVCR 1.0 mit Rolle bzw. Voraussetzung, Fundstelle und dem Kapitel, das sie erklärt. Rollen: **Betrachter** < **Rekorder** < **Administrator**; jede Rolle darf alles der Rollen davor ([Kapitel 6](06-benutzer-und-rechte.md#rollen)). „Server“ heißt: Zugang zur Kommandozeile im Projektordner.
 
-Stand-Angaben: **stabil** = im Kanzleibetrieb erprobt; **heuristisch** = hängt an der Erkennung der Zoom-Oberfläche und kann nach Zoom-Updates Anpassung brauchen ([Kapitel 16](16-einschraenkungen.md)); **experimentell** = bewusst abgeschaltet, nur nach eigener Abwägung einschalten.
+Stand-Angaben: **stabil** = im Produktivbetrieb erprobt; **heuristisch** = hängt an der Erkennung der Zoom-Oberfläche und kann nach Zoom-Updates Anpassung brauchen ([Kapitel 16](16-einschraenkungen.md)); **experimentell** = bewusst abgeschaltet, nur nach eigener Abwägung einschalten.
 
 ## Anmelden und Oberfläche
 
 | Funktion | Rolle oder Voraussetzung | Fundstelle | Kapitel |
 | --- | --- | --- | --- |
 | Anmelden mit lokalem Konto (Passwort, ggf. Authenticator-Code) | jedes Konto | Anmeldeseite → **Lokales Konto verwenden** · `POST /api/login` | [2](02-erste-schritte.md#anmelden) |
-| Anmelden mit Kanzlei-Login | OIDC eingerichtet, Konto mit gleicher E-Mail | Anmeldeseite → **Mit Kanzlei-Login anmelden** · `backend/zoomvcr/oidc.py` | [2](02-erste-schritte.md#anmelden), [12](12-anmeldung-oidc.md) |
+| Anmelden mit SSO | OIDC eingerichtet, Konto mit gleicher E-Mail | Anmeldeseite → **Mit SSO anmelden** · `backend/zoomvcr/oidc.py` | [2](02-erste-schritte.md#anmelden), [12](12-anmeldung-oidc.md) |
 | Abmelden, Sitzung endet nach 8 Stunden | jedes Konto | Seitenleiste unten | [2](02-erste-schritte.md#die-oberfläche) |
 | Übersicht: Läuft gerade, Als Nächstes, Zuletzt aufgenommen (aktualisiert alle 5 s) | Betrachter | **Übersicht** | [2](02-erste-schritte.md#die-oberfläche) |
 | Hell und dunkel | jedes Konto | Mond-/Sonnensymbol unten links | [2](02-erste-schritte.md#hell-und-dunkel) |
@@ -45,7 +45,7 @@ Stand-Angaben: **stabil** = im Kanzleibetrieb erprobt; **heuristisch** = hängt 
 | Folienerkennung mit Texterkennung (lokal) | – | Reiter **Folien** | [5](05-mediathek-und-auswertung.md#folien) |
 | Transkript mit Suche | KI-Key oder lokales Whisper | Reiter **Transkript** | [5](05-mediathek-und-auswertung.md#transkript), [7](07-ki-und-benachrichtigung.md#transkription) |
 | KI-Auswertung (Zusammenfassung, Gliederung, Argumentation, Praxishinweise, Rechtsquellen) | KI-Key und Haken „per KI erstellen“ | Reiter **Auswertung** | [5](05-mediathek-und-auswertung.md#auswertung), [7](07-ki-und-benachrichtigung.md#auswertung) |
-| Ergebnis prüfen und in der Kanzlei weiterverwenden | Betrachter | Detailansicht, **Herunterladen** | [5](05-mediathek-und-auswertung.md#ergebnis-prüfen-und-weiterverwenden) |
+| Ergebnis prüfen und weiterverwenden | Betrachter | Detailansicht, **Herunterladen** | [5](05-mediathek-und-auswertung.md#ergebnis-prüfen-und-weiterverwenden) |
 | Rechtsquellen-Fundstellen ohne KI (Paragraphen, Aktenzeichen, Gerichte aus dem Transkript) | Transkript vorhanden | `legal_sources.json`, Export `sources` · `backend/zoomvcr/analysis.py` | [5](05-mediathek-und-auswertung.md#ergebnis-prüfen-und-weiterverwenden), [14](14-architektur.md#api) |
 | Herunterladen: Video, Original, Transkript, Auswertung, Folienindex, ZIP | Betrachter | Detailansicht → **Herunterladen** · `GET …/export/{kind}` | [5](05-mediathek-und-auswertung.md#herunterladen) |
 | Neu verarbeiten | Rekorder | Detailansicht → **Neu verarbeiten** · `POST …/process` | [5](05-mediathek-und-auswertung.md#neu-verarbeiten) |
@@ -55,7 +55,7 @@ Stand-Angaben: **stabil** = im Kanzleibetrieb erprobt; **heuristisch** = hängt 
 
 | Funktion | Rolle oder Voraussetzung | Fundstelle | Kapitel |
 | --- | --- | --- | --- |
-| Konto anlegen (Kanzlei-Login oder lokal), Rolle ändern, sperren, Passwort zurücksetzen | Administrator | **Verwaltung → Benutzer** | [6](06-benutzer-und-rechte.md#konten-verwalten) |
+| Konto anlegen (SSO oder lokal), Rolle ändern, sperren, Passwort zurücksetzen | Administrator | **Verwaltung → Benutzer** | [6](06-benutzer-und-rechte.md#konten-verwalten) |
 | Eigenes Passwort ändern, Authenticator (TOTP) einrichten oder abschalten | lokales Konto | **Mein Konto** | [6](06-benutzer-und-rechte.md#mein-konto-und-zwei-faktor) |
 | Auditprotokoll | Administrator | **Verwaltung → Auditprotokoll** | [6](06-benutzer-und-rechte.md#auditprotokoll) |
 | KI-Dienst: Adresse, API-Key, Verbindung testen, Key entfernen | Administrator | **Verwaltung → KI und Benachrichtigung** | [7](07-ki-und-benachrichtigung.md#ki-dienst) |
@@ -79,4 +79,4 @@ Stand-Angaben: **stabil** = im Kanzleibetrieb erprobt; **heuristisch** = hängt 
 | Schnittstelle (REST-API) für eigene Skripte | Token oder Sitzung, je nach Rolle | `/api/…` | [14](14-architektur.md#api) |
 | Tests, CI, Bildschirmfotos | Entwicklung | `backend/tests`, `.github/workflows/ci.yml`, `scripts/docs/` | [15](15-tests.md) |
 
-Nicht vorhanden sind u. a.: Trennung der Mediathek nach Personen oder Mandaten, automatisches Löschen nach Frist, Teams/Webex, gleichzeitige Aufnahmen ([Kapitel 16](16-einschraenkungen.md)).
+Nicht vorhanden sind u. a.: Trennung der Mediathek nach Personen oder Teams, automatisches Löschen nach Frist, Teams/Webex, gleichzeitige Aufnahmen ([Kapitel 16](16-einschraenkungen.md)).

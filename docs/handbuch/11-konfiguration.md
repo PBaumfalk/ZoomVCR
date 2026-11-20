@@ -72,4 +72,4 @@ Normalerweise in der Oberfläche eingestellt ([Kapitel 7](07-ki-und-benachrichti
 
 ## Anmeldung über OIDC
 
-`ZOOMVCR_OIDC_DISCOVERY_URL`, `ZOOMVCR_OIDC_CLIENT_ID`, `ZOOMVCR_OIDC_CLIENT_SECRET`. Ohne alle drei bleibt der Kanzlei-Login aus ([Kapitel 12](12-anmeldung-oidc.md)).
+`ZOOMVCR_OIDC_DISCOVERY_URL`, `ZOOMVCR_OIDC_CLIENT_ID`, `ZOOMVCR_OIDC_CLIENT_SECRET`. Ohne alle drei bleibt SSO aus ([Kapitel 12](12-anmeldung-oidc.md)).

@@ -7,7 +7,7 @@ supplied in a link. OCR verification requires Zoom's own *self* row.
 import re
 import unicodedata
 
-DEFAULT_NAME = 'Kanzlei – Aufzeichnung'
+DEFAULT_NAME = 'ZoomVCR – Aufzeichnung'
 SELF_SUFFIX = re.compile(r'\(\s*(?:me|ich|you|du|moi)\s*\)', re.I)
 ROLE_SUFFIX = re.compile(r'\(\s*(?:host|co-host|gastgeber|moderator|organizer)\s*\)', re.I)
 

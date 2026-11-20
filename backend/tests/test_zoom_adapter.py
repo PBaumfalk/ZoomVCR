@@ -33,7 +33,7 @@ def test_reject_malicious_join_urls(url):
 def test_zoom_permission_requires_basis_and_both_confirmations():
     from datetime import datetime, timezone, timedelta
     future = datetime.now(timezone.utc) + timedelta(hours=2)
-    core = dict(title='Arbeitsrecht', source='desktop_manual', participant_name='Kanzlei Muster – Aufzeichnungsdienst', meeting_url='https://zoom.us/j/12345678901',
+    core = dict(title='Arbeitsrecht', source='desktop_manual', participant_name='Muster GmbH – Aufzeichnungsdienst', meeting_url='https://zoom.us/j/12345678901',
                 scheduled_at=future, duration_minutes=180)
     with pytest.raises(ValueError):
         CreateRecording(**core)

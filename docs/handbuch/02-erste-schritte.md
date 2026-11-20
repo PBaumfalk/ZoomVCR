@@ -2,22 +2,22 @@
 
 ## Anmelden
 
-Im Browser die Adresse Ihrer Installation öffnen, z. B. `https://vcr.kanzlei.example`; beim Probelauf `http://localhost:8080`. Die Adresse nennt Ihnen Ihr Admin. Üblicherweise ist ZoomVCR nur im Büronetz oder über VPN erreichbar.
+Im Browser die Adresse Ihrer Installation öffnen, z. B. `https://vcr.example.com`; beim Probelauf `http://localhost:8080`. Die Adresse nennt Ihnen Ihr Admin. Üblicherweise ist ZoomVCR nur im Büronetz oder über VPN erreichbar.
 
-![Anmeldeseite mit „Mit Kanzlei-Login anmelden“ und „Lokales Konto verwenden“](../screenshots/anmeldung.png)
+![Anmeldeseite mit „Mit SSO anmelden“ und „Lokales Konto verwenden“](../screenshots/anmeldung.png)
 
-- **Mit Kanzlei-Login anmelden** führt zur zentralen Anmeldung Ihrer Kanzlei (OpenID Connect, z. B. authentik oder Keycloak). Die Schaltfläche erscheint nur, wenn der Admin das eingerichtet hat ([Kapitel 12](12-anmeldung-oidc.md)); dann ist es der Normalfall.
-- **Lokales Konto verwenden** zeigt Benutzername, Passwort und – falls eingerichtet – den Authenticator-Code. Ohne Kanzlei-Login steht dieses Formular direkt auf der Seite.
+- **Mit SSO anmelden** führt zur zentralen Anmeldung Ihrer Organisation (OpenID Connect, z. B. authentik, Keycloak oder Entra ID). Die Schaltfläche erscheint nur, wenn der Admin das eingerichtet hat ([Kapitel 12](12-anmeldung-oidc.md)); dann ist es der Normalfall.
+- **Lokales Konto verwenden** zeigt Benutzername, Passwort und – falls eingerichtet – den Authenticator-Code. Ohne SSO steht dieses Formular direkt auf der Seite.
 
-Ein Konto legt ein Admin an ([Kapitel 6](06-benutzer-und-rechte.md)); selbst registrieren kann man sich nicht. Wer sich zum ersten Mal über den Kanzlei-Login anmeldet, braucht vorher ein solches Konto mit derselben E-Mail-Adresse. Nach acht Stunden läuft die Sitzung ab.
+Ein Konto legt ein Admin an ([Kapitel 6](06-benutzer-und-rechte.md)); selbst registrieren kann man sich nicht. Wer sich zum ersten Mal über SSO anmeldet, braucht vorher ein solches Konto mit derselben E-Mail-Adresse. Nach acht Stunden läuft die Sitzung ab.
 
 Was Sie sehen und tun dürfen, hängt von Ihrer **Rolle** ab; sie steht unten links unter Ihrem Namen:
 
 | Rolle | typisch für | sieht zusätzlich |
 | --- | --- | --- |
-| **Betrachter** | Rechtsanwältinnen und Rechtsanwälte, Referendare, die Aufnahmen ansehen | Übersicht, Mediathek, Herunterladen |
-| **Rekorder** | Sekretariat, ReFa, wer Fortbildungen plant | **Aufnahme planen**, **Jetzt starten**, **Stoppen**, **Neu verarbeiten** |
-| **Administrator** | Admin der Kanzlei | **Verwaltung**, Live-Bild, Löschen |
+| **Betrachter** | alle, die Aufnahmen ansehen und nutzen, z. B. Fachkräfte, Referenten, Auszubildende | Übersicht, Mediathek, Herunterladen |
+| **Rekorder** | wer Veranstaltungen plant, z. B. Assistenz, Sekretariat, Weiterbildungsverantwortliche | **Aufnahme planen**, **Jetzt starten**, **Stoppen**, **Neu verarbeiten** |
+| **Administrator** | Admin der Organisation | **Verwaltung**, Live-Bild, Löschen |
 
 ## Die Oberfläche
 
@@ -41,7 +41,7 @@ Eine Testaufnahme ist der schnellste Weg, ZoomVCR kennenzulernen: Sie läuft ohn
 **Voraussetzung:** Ein Konto mit der Rolle **Rekorder** oder **Administrator**. Als Betrachter fehlt die Schaltfläche **Aufnahme planen**.
 
 1. **Aufnahme planen** oben links anklicken.
-2. **Titel** eintragen, z. B. `Testaufnahme Probelauf Kanzlei Muster`.
+2. **Titel** eintragen, z. B. `Testaufnahme Probelauf`.
 3. **Beginn** auf die nächste Minute setzen. Vorgeschlagen ist die nächste volle Stunde; die Aufnahme würde sonst erst dann starten.
 4. **Dauer in Minuten**: `1`.
 5. **Weitere Optionen** aufklappen und bei **Quelle** „Testaufnahme ohne Zoom (Testbild und Ton)“ wählen. Ist Zoom auf dem Server nicht aktiviert (etwa beim Probelauf), ist das schon vorausgewählt, und die Felder für Zoom-Link und Name in Zoom fehlen.

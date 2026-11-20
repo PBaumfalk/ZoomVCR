@@ -6,7 +6,7 @@ import { Hanken_Grotesk, IBM_Plex_Mono } from 'next/font/google';
 const ui = Hanken_Grotesk({ subsets: ['latin'], variable: '--font-ui', display: 'swap' });
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' });
 
-export const metadata: Metadata = { title: 'ZoomVCR', description: 'Fortbildungsrekorder der Kanzlei' };
+export const metadata: Metadata = { title: 'ZoomVCR', description: 'Rekorder für Zoom-Webinare und Online-Fortbildungen' };
 export const viewport: Viewport = { themeColor: [{ media: '(prefers-color-scheme: light)', color: '#f4f3ef' }, { media: '(prefers-color-scheme: dark)', color: '#131417' }] };
 
 // Gewähltes Farbschema vor dem ersten Zeichnen setzen, damit nichts aufblitzt.

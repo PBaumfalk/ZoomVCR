@@ -6,7 +6,7 @@ Die **Mediathek** listet alle Aufnahmen, die neuesten oben. Das Suchfeld filtert
 
 ![Mediathek](../screenshots/mediathek.png)
 
-Alle Konten sehen alle Aufnahmen dieser Installation. Eine Trennung nach Personen oder Mandaten gibt es nicht ([Kapitel 16](16-einschraenkungen.md)).
+Alle Konten sehen alle Aufnahmen dieser Installation. Eine Trennung nach Personen oder Teams gibt es nicht ([Kapitel 16](16-einschraenkungen.md)).
 
 ## Die Detailansicht
 
@@ -43,7 +43,7 @@ Der Reiter **Transkript** zeigt den Vortrag Zeile für Zeile. Das Suchfeld **Im 
 
 ## Ergebnis prüfen und weiterverwenden
 
-Dieser Abschnitt richtet sich an Rechtsanwältinnen und Rechtsanwälte, die aus einer Fortbildung etwas in die Kanzleiarbeit übernehmen wollen. Ansehen, prüfen und herunterladen darf jedes Konto (Rolle **Betrachter** und höher); **Neu verarbeiten** braucht die Rolle **Rekorder**.
+Dieser Abschnitt richtet sich an alle, die aus einer Aufnahme etwas in die eigene Arbeit übernehmen wollen, etwa eine Aussage zitieren, eine Norm nachschlagen oder Folien weitergeben. Ansehen, prüfen und herunterladen darf jedes Konto (Rolle **Betrachter** und höher); **Neu verarbeiten** braucht die Rolle **Rekorder**.
 
 ### Welche Daten wohin fließen
 
@@ -63,7 +63,7 @@ Das Modell bekommt die feste Anweisung, jede Aussage mit einem Zeitstempel aus d
 
 1. **Hinweise lesen.** Oben in der Detailansicht steht, was die Verarbeitung gemeldet hat: wie viel geschnitten wurde, ob die Transkription gescheitert ist, ob die Aufnahme fast stumm war. Bei einem Hinweis zur Transkription ist die Auswertung unvollständig oder fehlt.
 2. **Aussage an der Quelle hören.** Für jede Aussage, die Sie übernehmen wollen, den Zeitstempel anklicken. Das Video springt an die Stelle; im Reiter **Transkript** steht derselbe Satz. Fehlt ein Zeitstempel, die Aussage nicht ungeprüft übernehmen.
-3. **Rechtsquellen gegenlesen.** Die Spracherkennung verhört sich gern bei Ziffern („§ 4“ statt „§ 14“) und Aktenzeichen. Die Folie zur selben Zeit (Reiter **Folien**) zeigt die Norm oft im Wortlaut; Paragraphen und Entscheidungen anschließend in der Datenbank Ihrer Wahl nachschlagen.
+3. **Fakten und Quellen gegenlesen.** Die Spracherkennung verhört sich gern bei Ziffern („§ 4“ statt „§ 14“) und Aktenzeichen. Die Folie zur selben Zeit (Reiter **Folien**) zeigt die Norm oft im Wortlaut; Paragraphen und Entscheidungen anschließend in der Datenbank Ihrer Wahl nachschlagen.
 4. **Ergebnis einordnen.** Die Auswertung gibt wieder, was der Referent gesagt hat, nicht die Rechtslage. Aussagen zu Rechtsprechung sind Behauptungen des Vortrags zum Zeitpunkt der Fortbildung.
 
 ### Weiterverwenden
@@ -76,7 +76,7 @@ Das Modell bekommt die feste Anweisung, jede Aussage mit einem Zeitstempel aus d
 | Auswertung in ein anderes Programm übernehmen | **Herunterladen → Auswertung (JSON)**: maschinenlesbar, Felder `zusammenfassung`, `gliederung`, `argumentation`, `praxishinweise`, `rechtsquellen`. |
 | Fortbildung archivieren | **Alles als ZIP**: Video, Folien, Transkript, Auswertung und `authorization.json` mit der Berechtigungsangabe beim Planen. |
 
-Jeder Export steht im Auditprotokoll. ZoomVCR ist **kein Teilnahmenachweis**: Eine Aufnahme belegt nicht, dass jemand an der Fortbildung teilgenommen hat ([Kapitel 8](08-datenschutz-und-recht.md)). Aufnahmen mit Mandatsbezug gehören nicht in ZoomVCR, weil alle Konten alle Aufnahmen sehen.
+Jeder Export steht im Auditprotokoll. ZoomVCR ist **kein Teilnahmenachweis**: Eine Aufnahme belegt nicht, dass jemand an der Fortbildung teilgenommen hat ([Kapitel 8](08-datenschutz-und-recht.md)). Vertrauliche Inhalte (z. B. mit Mandats-, Patienten- oder Personalbezug) gehören nicht in ZoomVCR, weil alle Konten alle Aufnahmen sehen.
 
 ## Herunterladen
 

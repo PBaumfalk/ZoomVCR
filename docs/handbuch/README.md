@@ -7,8 +7,8 @@ Willkommen im Handbuch von **ZoomVCR**, dem Rekorder für Zoom-Fortbildungen. Te
 | Sie sind … | Lesen Sie zuerst | Danach |
 | --- | --- | --- |
 | **neu im Team** | [Erste Schritte](02-erste-schritte.md): Anmelden, Oberfläche, [Ihr erster Ablauf mit einer Testaufnahme](02-erste-schritte.md#ihr-erster-ablauf-eine-testaufnahme) | [Was ist ZoomVCR?](01-was-ist-zoomvcr.md) |
-| **ReFa, Sekretariat** – Sie planen Aufnahmen | [Aufnahme planen](03-aufnahme-planen.md) | [Während der Aufnahme](04-waehrend-der-aufnahme.md), [Fehler](05-mediathek-und-auswertung.md#fehler) |
-| **Rechtsanwältin, Rechtsanwalt** – Sie arbeiten mit dem Ergebnis | [Mediathek und Auswertung](05-mediathek-und-auswertung.md), besonders [Ergebnis prüfen und weiterverwenden](05-mediathek-und-auswertung.md#ergebnis-prüfen-und-weiterverwenden) | [Datenschutz und Recht](08-datenschutz-und-recht.md) |
+| **Assistenz, Sekretariat, Weiterbildung** – Sie planen Aufnahmen | [Aufnahme planen](03-aufnahme-planen.md) | [Während der Aufnahme](04-waehrend-der-aufnahme.md), [Fehler](05-mediathek-und-auswertung.md#fehler) |
+| **Fachleute** – Sie arbeiten mit dem Inhalt der Aufnahmen | [Mediathek und Auswertung](05-mediathek-und-auswertung.md), besonders [Ergebnis prüfen und weiterverwenden](05-mediathek-und-auswertung.md#ergebnis-prüfen-und-weiterverwenden) | [Datenschutz und Recht](08-datenschutz-und-recht.md) |
 | **Admin** – Sie verwalten Konten und Dienste | [Benutzer und Rechte](06-benutzer-und-rechte.md) | [KI und Benachrichtigung](07-ki-und-benachrichtigung.md) |
 | **IT** – Sie installieren und betreiben | [Installation](09-installation.md) oder [Installation mit Claude Code](09a-installation-mit-claude-code.md) | [Zoom-Desktop](10-zoom-desktop.md), [Betrieb](13-betrieb.md) |
 
@@ -42,7 +42,7 @@ Jede Funktion mit Rolle, Fundstelle und Kapitel: **[Funktionsliste](anhang-funkt
 | [9a – Installation mit Claude Code](09a-installation-mit-claude-code.md) | Vorbereitung, Installationsprompt, Erfolgskontrolle |
 | [10 – Der Zoom-Desktop](10-zoom-desktop.md) | Zoom-Anmeldung über VNC, Zoom bei Bedarf, Ressourcen |
 | [11 – Konfiguration](11-konfiguration.md) | Alle Umgebungsvariablen |
-| [12 – Anmeldung über OIDC](12-anmeldung-oidc.md) | Kanzlei-Login über authentik, Keycloak & Co. |
+| [12 – Anmeldung über OIDC](12-anmeldung-oidc.md) | SSO über authentik, Keycloak, Entra ID & Co. |
 | [13 – Betrieb](13-betrieb.md) | Kommandozeile, Updates, Sicherung, Wiederherstellung, Fehlerbilder |
 | [14 – Architektur](14-architektur.md) | Dienste, Ablauf einer Aufnahme, Datenablage, API |
 | [15 – Tests](15-tests.md) | Backend-Tests, CI, Bildschirmfotos |
@@ -51,7 +51,7 @@ Jede Funktion mit Rolle, Fundstelle und Kapitel: **[Funktionsliste](anhang-funkt
 
 ## Schnelleinstieg in 5 Minuten
 
-1. ZoomVCR im Browser öffnen und **Mit Kanzlei-Login anmelden** ([Kapitel 2](02-erste-schritte.md)).
+1. ZoomVCR im Browser öffnen und **Mit SSO anmelden** ([Kapitel 2](02-erste-schritte.md)).
 2. **Aufnahme planen**: Titel, Zoom-Einladungslink, Beginn und Dauer eintragen ([Kapitel 3](03-aufnahme-planen.md)).
 3. Berechtigung wählen, den Haken „Die Aufzeichnung ist erlaubt …“ setzen, **Planen**.
 4. Nichts weiter tun. Der Rekorder tritt fünf Minuten vor Beginn bei und nimmt bis 15 Minuten nach dem Ende auf ([Kapitel 4](04-waehrend-der-aufnahme.md)).

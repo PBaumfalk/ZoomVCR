@@ -1,6 +1,6 @@
 # 12 – Anmeldung über OIDC
 
-ZoomVCR kann die Anmeldung an einen OpenID-Connect-Anbieter der Kanzlei abgeben, z. B. authentik, Keycloak oder Microsoft Entra ID. Die Schritte unten zeigen authentik; bei anderen Anbietern heißen die Menüpunkte anders, die Werte sind dieselben. Die Schaltfläche heißt dann **Mit Kanzlei-Login anmelden**.
+ZoomVCR kann die Anmeldung an einen OpenID-Connect-Anbieter Ihrer Organisation abgeben, z. B. authentik, Keycloak oder Microsoft Entra ID. Die Schritte unten zeigen authentik; bei anderen Anbietern heißen die Menüpunkte anders, die Werte sind dieselben. Die Schaltfläche heißt dann **Mit SSO anmelden**.
 
 ## In authentik
 
@@ -20,7 +20,7 @@ ZOOMVCR_OIDC_CLIENT_SECRET=<client-secret>
 
 Danach `docker compose up -d --force-recreate api`.
 
-Vor dem ersten Login legt ein Admin für jede Person ein Konto vom Typ **Kanzlei-Login** an, mit derselben bestätigten E-Mail wie beim Anbieter und der gewünschten Rolle ([Kapitel 6](06-benutzer-und-rechte.md)).
+Vor dem ersten Login legt ein Admin für jede Person ein Konto vom Typ **Zentrale Anmeldung (SSO)** an, mit derselben bestätigten E-Mail wie beim Anbieter und der gewünschten Rolle ([Kapitel 6](06-benutzer-und-rechte.md)).
 
 ## Wie es geprüft wird
 

@@ -152,7 +152,7 @@ function Login({ onDone }: { onDone: (a: Account) => void }) {
     <div className="login">
       <div className="brand"><span className="mark" aria-hidden><i /></span><div><b>ZoomVCR</b><small>Fortbildungsrekorder</small></div></div>
       <h1>Anmelden</h1>
-      {oidc && <a className="btn primary wide" href="/api/auth/oidc/start"><ShieldCheck size={16} /> Mit Kanzlei-Login anmelden</a>}
+      {oidc && <a className="btn primary wide" href="/api/auth/oidc/start"><ShieldCheck size={16} /> Mit SSO anmelden</a>}
       {oidc && !local && <button className="link" onClick={() => setLocal(true)}>Lokales Konto verwenden</button>}
       {showLocal && <form onSubmit={submit} className="form">
         <label className="field"><span>Benutzername</span><input autoFocus={!oidc} autoComplete="username" value={username} onChange={e => setUsername(e.target.value)} required /></label>
@@ -348,7 +348,7 @@ function PlanDialog({ desktopEnabled, close, done }: { desktopEnabled: boolean; 
   const [start, setStart] = useState(() => { const d = new Date(Date.now() + 3600000); d.setMinutes(0, 0, 0); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16); });
   const [minutes, setMinutes] = useState(180);
   const [source, setSource] = useState<'synthetic' | 'desktop_manual'>(desktopEnabled ? 'desktop_manual' : 'synthetic');
-  const [participantName, setParticipantName] = useState('Kanzlei – Aufzeichnung');
+  const [participantName, setParticipantName] = useState('ZoomVCR – Aufzeichnung');
   const [authorization, setAuthorization] = useState<'host' | 'written_consent' | 'other'>('host');
   const [reference, setReference] = useState('');
   const [consent, setConsent] = useState(false);

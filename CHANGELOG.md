@@ -5,14 +5,14 @@ Alle nennenswerten Änderungen an ZoomVCR. Format nach [Keep a Changelog](https:
 ## [Unveröffentlicht]
 
 ### Neu
-- **Veröffentlichung unter MIT-Lizenz**; README und Handbuch beschreiben ZoomVCR als Produkt für beliebige Kanzleien, ohne Bezug auf eine bestimmte Installation.
+- **Veröffentlichung unter MIT-Lizenz**; README und Handbuch beschreiben ZoomVCR als allgemeinen Rekorder für Zoom-Webinare und Online-Fortbildungen, ohne Bezug auf eine bestimmte Installation.
 - **`scripts/install.sh`**: prüft Voraussetzungen und freie Ports, legt `.env` mit Zufallswerten an (eine vorhandene bleibt erhalten, Geheimnisse werden nie angezeigt), baut, startet und prüft `/health`, Dienste und Anmeldeseite. `--lokal` für einen Probelauf auf dem eigenen Rechner (auch Mac/arm64, ohne Zoom), `--domain` bzw. `--origin` für Server, `--zoom` für echte Aufnahmen. Wiederholbar, dient auch für Updates.
 - **Handbuch**: Kapitel 9a „Installation mit Claude Code“ mit Installationsprompt, Anhang „Funktionsliste“, erster Ablauf mit einer Testaufnahme (Kapitel 2), Beispiel zum Planen (Kapitel 3), „Ergebnis prüfen und weiterverwenden“ mit dem Datenfluss der KI (Kapitel 5), Wiederherstellung und Betrieb hinter vorhandenem Reverse Proxy (Kapitel 13), Wegweiser nach Zielgruppen.
 - `ZOOMVCR_HTTP_PORT`/`ZOOMVCR_HTTPS_PORT` für den mitgelieferten Caddy, `ZOOMVCR_LOCAL_ASR` für das Image mit lokalem Whisper (bleibt über Updates erhalten).
 
 ### Geändert
-- Standardname in Zoom ist „Kanzlei – Aufzeichnung“; OIDC ist nicht mehr auf authentik zugeschnitten (Bezeichnung „Kanzlei-Login (OIDC)“).
-- Hinweis zur Mail-Einrichtung in der Oberfläche nennt die `.env`-Variablen statt eines kanzleieigenen Skripts.
+- Standardname in Zoom ist „ZoomVCR – Aufzeichnung“; die zentrale Anmeldung heißt „Mit SSO anmelden“ bzw. „Zentrale Anmeldung (SSO)“ und ist nicht mehr auf authentik zugeschnitten.
+- Hinweis zur Mail-Einrichtung in der Oberfläche nennt die `.env`-Variablen statt eines installationsspezifischen Skripts.
 
 ### Behoben
 - `ZOOMVCR_PUBLIC_ORIGIN=http://localhost` (ohne Port) und Adressen mit Standardport (`:80`, `:443`) führten zu „Invalid request origin“ bzw. ließen die API nicht starten; Adressen werden jetzt wie im Browser verglichen.

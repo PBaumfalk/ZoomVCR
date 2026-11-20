@@ -18,7 +18,7 @@ const q = (ms) => Math.round(ms / (15 * 60e3)) * 15 * 60e3;
 // Tag relativ zu heute, feste Uhrzeit (Ortszeit des Rechners, der die Fotos macht)
 const dayAt = (days, hour, min = 0) => { const d = new Date(now + days * D); d.setHours(hour, min, 0, 0); return d.getTime(); };
 const rec = (id, title, start, minutes, status, extra = {}) => ({
-  id, title, source: 'desktop_manual', participant_name: 'Kanzlei – Aufzeichnung',
+  id, title, source: 'desktop_manual', participant_name: 'ZoomVCR – Aufzeichnung',
   scheduled_at: at(q(start)), ends_at: at(q(start) + minutes * 60e3), status,
   duration_seconds: null, error: null, processing_notes: null, metadata: {}, ...extra,
 });
@@ -37,7 +37,7 @@ const recordings = [
   }),
   rec('f6', 'Betriebsverfassungsrecht für die Praxis', dayAt(-9, 9), 180, 'ready', { duration_seconds: 2 * 3600 + 55 * 60 }),
   rec('g7', 'Arbeitszeiterfassung nach der Rechtsprechung', dayAt(-12, 14), 120, 'ready', { duration_seconds: 1 * 3600 + 52 * 60 }),
-  rec('h8', 'Testaufnahme Probelauf Kanzlei Muster', dayAt(-14, 8, 45), 1, 'ready', {
+  rec('h8', 'Testaufnahme Probelauf', dayAt(-14, 8, 45), 1, 'ready', {
     source: 'synthetic', participant_name: null, duration_seconds: 59,
     processing_notes: 'Transkription über API fehlgeschlagen: Kein API-Key hinterlegt (Verwaltung → KI und Benachrichtigung) | Kein API-Key hinterlegt; keine KI-Auswertung, keine Daten übertragen',
   }),
@@ -102,15 +102,15 @@ const summary = {
 };
 
 const users = [
-  { id: 'u1', username: 'admin', email: 'admin@kanzlei.example', role: 'admin', provider: 'oidc', active: true, mfa_enabled: true, last_login_at: at(now - 20 * 60e3), created_at: at(now - 30 * D) },
-  { id: 'u2', username: 'sekretariat', email: 'sekretariat@kanzlei.example', role: 'recorder', provider: 'oidc', active: true, mfa_enabled: false, last_login_at: at(now - 2 * D), created_at: at(now - 20 * D) },
-  { id: 'u3', username: 'referendar', email: 'referendar@kanzlei.example', role: 'viewer', provider: 'oidc', active: true, mfa_enabled: false, last_login_at: at(now - 4 * D), created_at: at(now - 10 * D) },
+  { id: 'u1', username: 'admin', email: 'admin@muster.example', role: 'admin', provider: 'oidc', active: true, mfa_enabled: true, last_login_at: at(now - 20 * 60e3), created_at: at(now - 30 * D) },
+  { id: 'u2', username: 'assistenz', email: 'assistenz@muster.example', role: 'recorder', provider: 'oidc', active: true, mfa_enabled: false, last_login_at: at(now - 2 * D), created_at: at(now - 20 * D) },
+  { id: 'u3', username: 'fachbereich', email: 'fachbereich@muster.example', role: 'viewer', provider: 'oidc', active: true, mfa_enabled: false, last_login_at: at(now - 4 * D), created_at: at(now - 10 * D) },
   { id: 'u4', username: 'notfall', email: null, role: 'admin', provider: 'local', active: true, mfa_enabled: true, last_login_at: null, created_at: at(now - 30 * D) },
 ];
 const audit = [
   ['admin', 'recording.start', 'recording', 'a1'], ['admin', 'auth.login', 'user', 'u1'],
-  ['sekretariat', 'recording.create', 'recording', 'c3'], ['sekretariat', 'recording.create', 'recording', 'd4'],
-  ['referendar', 'recording.export', 'recording', 'b2'], ['admin', 'settings.ai_update', 'settings', 'ai'],
+  ['assistenz', 'recording.create', 'recording', 'c3'], ['assistenz', 'recording.create', 'recording', 'd4'],
+  ['fachbereich', 'recording.export', 'recording', 'b2'], ['admin', 'settings.ai_update', 'settings', 'ai'],
   ['admin', 'user.create', 'user', 'u3'], ['admin', 'recording.delete', 'recording', 'x9'],
 ].map(([actor, action, target_type, target_id], i) => ({
   id: 'a' + i, created_at: at(now - (i * 3 + 1) * H), actor, action, target_type, target_id, ip_address: '10.8.0.' + (12 + i), details: {},
@@ -121,7 +121,7 @@ const ai = {
   transcription_provider: 'openai', transcription_model: 'whisper-1', summary_enabled: true, summary_model: 'gpt-5-mini',
   local_asr_available: false, updated: { at: at(now - 8 * D), by: 'admin' },
 };
-const mail = { configured: true, alert_email: 'it@kanzlei.example', mail_from: 'rekorder@kanzlei.example', smtp_server: 'mail.kanzlei.example:465' };
+const mail = { configured: true, alert_email: 'it@muster.example', mail_from: 'rekorder@muster.example', smtp_server: 'mail.muster.example:465' };
 
 function routes(method, path) {
   if (path === '/api/auth/config') return { oidc_enabled: true };

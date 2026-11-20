@@ -21,7 +21,7 @@ curl -fsS https://vcr.example.com/health  # {"status":"ok"} = Datenbank und Wart
 ./zoomvcr recordings [--search TEXT]
 ./zoomvcr schedule --title 'Fortbildung Arbeitsrecht' --source desktop_manual \
   --url 'https://us06web.zoom.us/j/12345678901?pwd=TOKEN' \
-  --participant-name 'Kanzlei – Aufzeichnung' \
+  --participant-name 'ZoomVCR – Aufzeichnung' \
   --at '2026-11-20T09:00:00+01:00' --minutes 180 \
   --authorization written_consent --authorization-reference 'E-Mail vom 05.11.2026' \
   --permission-confirmed --disclosure-acknowledged
@@ -101,7 +101,7 @@ Die Sicherung mit `--clean --if-exists` ersetzt den Datenbankinhalt vollständig
 | Hinweis „Kein API-Key hinterlegt“ | Kein KI-Dienst eingerichtet; gewollt, wenn nichts übertragen werden soll. Sonst Key eintragen ([Kapitel 7](07-ki-und-benachrichtigung.md)) und **Neu verarbeiten**. |
 | Anmeldung scheitert mit „Invalid request origin“ | Die Adresse im Browser weicht von `ZOOMVCR_PUBLIC_ORIGIN` ab (anderer Name, Port oder http statt https). Wert in `.env` korrigieren, `docker compose up -d --force-recreate api`. |
 | API startet nicht: „Use HTTPS for ZOOMVCR_PUBLIC_ORIGIN …“ | Ohne HTTPS sind nur `http://localhost` und `http://127.0.0.1` erlaubt ([Kapitel 11](11-konfiguration.md#grundlagen)). |
-| Anmeldung über den Kanzlei-Login schlägt fehl | Kein Konto mit dieser E-Mail, E-Mail nicht bestätigt oder Redirect URI falsch ([Kapitel 12](12-anmeldung-oidc.md)). |
+| Anmeldung über SSO schlägt fehl | Kein Konto mit dieser E-Mail, E-Mail nicht bestätigt oder Redirect URI falsch ([Kapitel 12](12-anmeldung-oidc.md)). |
 | `port is already allocated` beim Start | Ein anderer Dienst nutzt Port 80/443 bzw. den Probelauf-Port. Anderen Port wählen (`--port`) oder ZoomVCR hinter den vorhandenen Proxy stellen. |
 | Hohe CPU-Last ohne Aufnahme | Zoom läuft noch (z. B. nach einer Anmeldung per VNC). Im VNC Zoom beenden. |
 

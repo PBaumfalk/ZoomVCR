@@ -44,7 +44,7 @@ def test_zoom_recording_gets_end_buffer(client, monkeypatch):
     assert login_as(http, "admin", "first_admin_password_2026").status_code == 200
     start = datetime.now(timezone.utc) + timedelta(hours=2)
     body = {"title": "Fortbildung", "source": "desktop_manual", "meeting_url": "https://us06web.zoom.us/j/12345678901?pwd=abc",
-            "participant_name": "Kanzlei", "scheduled_at": start.isoformat(), "duration_minutes": 180,
+            "participant_name": "Muster GmbH", "scheduled_at": start.isoformat(), "duration_minutes": 180,
             "permission_confirmed": True, "disclosure_acknowledged": True, "authorization_basis": "host"}
     r = post(http, "/api/recordings", body)
     assert r.status_code == 201, r.text

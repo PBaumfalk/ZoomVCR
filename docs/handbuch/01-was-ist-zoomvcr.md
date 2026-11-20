@@ -34,7 +34,7 @@ Scheitert etwas, steht die Aufnahme auf **Fehler** oder **Unterbrochen**, und de
 | --- | --- |
 | **Aufnahme** | Ein geplanter oder fertiger Mitschnitt einer Veranstaltung. |
 | **Rekorder** | Der Zoom-Client im Container `desktop` auf dem Server, mit eigenem Zoom-Konto. Er nimmt immer nur eine Veranstaltung gleichzeitig auf. |
-| **Name in Zoom** | So erscheint der Rekorder in der Teilnehmerliste, z. B. „Kanzlei – Aufzeichnung“. |
+| **Name in Zoom** | So erscheint der Rekorder in der Teilnehmerliste, z. B. „ZoomVCR – Aufzeichnung“. |
 | **Berechtigung** | Ihre Angabe, warum die Aufnahme erlaubt ist: Sie sind Veranstalter, oder es gibt eine schriftliche Freigabe. Sie wird protokolliert. |
 | **Tonwächter** | Prüft während der Aufnahme laufend, ob Zoom mit dem Computerton verbunden ist, und stellt ihn bei Bedarf wieder her. |
 | **Verarbeitung** | Schnitt, Folienerkennung, Transkription und KI-Auswertung nach der Aufnahme. |

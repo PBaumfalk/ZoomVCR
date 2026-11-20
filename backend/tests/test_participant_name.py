@@ -37,7 +37,7 @@ from zoomvcr.schemas import CreateRecording, UpdateParticipantName
 
 
 def payload(**changes):
-    original = dict(title="Seminar", source="desktop_manual", participant_name="Kanzlei Muster – Aufzeichnungsdienst",
+    original = dict(title="Seminar", source="desktop_manual", participant_name="Muster GmbH – Aufzeichnungsdienst",
         meeting_url="https://us06web.zoom.us/j/12345678901?pwd=abc%2Bdef",
         scheduled_at=datetime.now(timezone.utc) + timedelta(hours=4), duration_minutes=180,
         authorization_basis="host", permission_confirmed=True, disclosure_acknowledged=True)
@@ -61,7 +61,7 @@ def test_zoom_requires_nonempty_name():
 
 
 def test_zoom_link_passes_name_but_does_not_certify_it():
-    name = 'Kanzlei Muster – Aufzeichnungsdienst'
+    name = 'Muster GmbH – Aufzeichnungsdienst'
     uri = validate_zoom_meeting_url(payload()['meeting_url'], name)
     assert parse_qs(urlparse(uri).query)['uname'] == [name]
     assert parse_qs(urlparse(uri).query)['pwd'] == ['abc+def']
@@ -69,11 +69,11 @@ def test_zoom_link_passes_name_but_does_not_certify_it():
 
 
 def test_self_name_verification_is_conservative():
-    assert name_visible_on_self_row('Participants\nKanzlei Muster – Aufzeichnungsdienst (Me)\nOther participant', 'Kanzlei Muster – Aufzeichnungsdienst')
-    assert name_visible_on_self_row('Teilnehmer\nKanzlei Muster - Aufzeichnungsdienst (Ich)', 'Kanzlei Muster – Aufzeichnungsdienst')
-    assert not name_visible_on_self_row('Kanzlei Muster – Aufzeichnungsdienst\nAnderer (Ich)', 'Kanzlei Muster – Aufzeichnungsdienst')
-    assert not name_visible_on_self_row('Kanzlei Muster – Aufzeichnungsdienst (host)\nOther (Me)', 'Kanzlei Muster – Aufzeichnungsdienst')
-    assert not name_visible_on_self_row('Kanzlei Muster – Aufzeichnungsdienst (Me)', 'Fremder Teilnehmer')
+    assert name_visible_on_self_row('Participants\nMuster GmbH – Aufzeichnungsdienst (Me)\nOther participant', 'Muster GmbH – Aufzeichnungsdienst')
+    assert name_visible_on_self_row('Teilnehmer\nMuster GmbH - Aufzeichnungsdienst (Ich)', 'Muster GmbH – Aufzeichnungsdienst')
+    assert not name_visible_on_self_row('Muster GmbH – Aufzeichnungsdienst\nAnderer (Ich)', 'Muster GmbH – Aufzeichnungsdienst')
+    assert not name_visible_on_self_row('Muster GmbH – Aufzeichnungsdienst (host)\nOther (Me)', 'Muster GmbH – Aufzeichnungsdienst')
+    assert not name_visible_on_self_row('Muster GmbH – Aufzeichnungsdienst (Me)', 'Fremder Teilnehmer')
     assert not name_visible_on_self_row('Annabelle (Me)', 'Anna')
     assert name_visible_on_self_row('Anna (Host) (Me)', 'Anna')
 
@@ -92,12 +92,12 @@ def test_new_recording_persists_and_edits_name(tmp_path, monkeypatch):
     monkeypatch.setattr(main, 'recording_dir', local_folder)
     with make_session() as db:
         result = main.create_recording(CreateRecording(**payload()), db=db, user='test')
-        assert result['participant_name'] == 'Kanzlei Muster – Aufzeichnungsdienst'
+        assert result['participant_name'] == 'Muster GmbH – Aufzeichnungsdienst'
         assert result['metadata']['participant_name_status'] == 'not_checked'
         rid = result['id']
     with make_session() as db:
         saved = db.get(Recording, rid)
-        assert saved.participant_name == 'Kanzlei Muster – Aufzeichnungsdienst'
+        assert saved.participant_name == 'Muster GmbH – Aufzeichnungsdienst'
         changed = main.change_participant_name(rid, UpdateParticipantName(participant_name=' Eigener Testname '), db=db, user='test')
         assert changed['participant_name'] == 'Eigener Testname'
     with make_session() as db:

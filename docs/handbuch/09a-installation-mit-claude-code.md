@@ -9,7 +9,7 @@ Mit [Claude Code](https://code.claude.com/docs/en/setup), dem Kommandozeilen-Ass
 | **Rechner oder Server** mit Docker Engine und Docker Compose v2 | ZoomVCR läuft in Containern | Server: Linux x86-64, 4 vCPU, 8 GB RAM ([Kapitel 9](09-installation.md#voraussetzungen)). Für einen Probelauf genügt ein Mac oder Linux-PC mit Docker Desktop. |
 | **git** | Repository holen | Linux: Paket `git`; Mac: `xcode-select --install` |
 | **Claude Code** | Der Assistent | Installation laut [offizieller Anleitung](https://code.claude.com/docs/en/setup), siehe nächster Abschnitt. Nötig ist ein Claude-Abo (Pro, Max, Team oder Enterprise) oder ein Konto in der Claude Console; das kostenlose Abo enthält Claude Code nicht. |
-| Für einen Server: **DNS-Namen** wie `vcr.kanzlei.example` | Adresse im Browser | Ihr DNS. Für automatisches HTTPS müssen die Ports 80 und 443 von außen erreichbar sein; sonst einen vorhandenen Reverse Proxy nutzen. |
+| Für einen Server: **DNS-Namen** wie `vcr.example.com` | Adresse im Browser | Ihr DNS. Für automatisches HTTPS müssen die Ports 80 und 443 von außen erreichbar sein; sonst einen vorhandenen Reverse Proxy nutzen. |
 | Für echte Zoom-Aufnahmen: **Zoom-Konto** des Rekorders | Der Rekorder tritt damit bei | Wird nach der Installation per VNC angemeldet ([Kapitel 10](10-zoom-desktop.md)); das macht ein Mensch, nicht Claude. |
 
 Optional, später in der Oberfläche: API-Key eines KI-Dienstes ([Kapitel 7](07-ki-und-benachrichtigung.md)), Mailpostfach ([Kapitel 11](11-konfiguration.md#mail)), authentik ([Kapitel 12](12-anmeldung-oidc.md)).
@@ -124,7 +124,7 @@ curl -fsS http://localhost:8080/health                              # {"status":
 ./zoomvcr recordings                                                # nach etwa einer Minute: "status": "ready"
 ```
 
-Für einen Server statt `--lokal` die Option `--domain vcr.kanzlei.example` (mitgelieferter Caddy mit automatischem HTTPS) oder `--origin https://vcr.kanzlei.example` (vorhandener Reverse Proxy) verwenden, für echte Zoom-Aufnahmen zusätzlich `--zoom`. Was das Skript im Einzelnen tut: [Kapitel 9](09-installation.md#das-installationsskript).
+Für einen Server statt `--lokal` die Option `--domain vcr.example.com` (mitgelieferter Caddy mit automatischem HTTPS) oder `--origin https://vcr.example.com` (vorhandener Reverse Proxy) verwenden, für echte Zoom-Aufnahmen zusätzlich `--zoom`. Was das Skript im Einzelnen tut: [Kapitel 9](09-installation.md#das-installationsskript).
 
 ## Wenn etwas nicht klappt
 
@@ -136,4 +136,4 @@ Für einen Server statt `--lokal` die Option `--domain vcr.kanzlei.example` (mit
 | `ZOOMVCR_PUBLIC_ORIGIN steht noch auf der Beispieladresse` | Es gibt eine `.env` aus einer früheren Handinstallation ohne echte Adresse. Skript mit `--lokal`, `--domain` oder `--origin` erneut starten. |
 | Server-Adresse „von hier (noch) nicht erreichbar“ | DNS-Eintrag fehlt, Firewall sperrt 80/443 oder das Zertifikat wird noch ausgestellt. `docker compose logs proxy` zeigt den Grund. |
 
-Claude Code arbeitet nur in diesem Ordner und mit Ihrer Freigabe. Zugangsdaten für Zoom, den Kanzlei-Login, Mail oder den KI-Dienst geben Sie selbst in der Oberfläche bzw. in `.env` ein, nicht im Chat.
+Claude Code arbeitet nur in diesem Ordner und mit Ihrer Freigabe. Zugangsdaten für Zoom, die zentrale Anmeldung, Mail oder den KI-Dienst geben Sie selbst in der Oberfläche bzw. in `.env` ein, nicht im Chat.

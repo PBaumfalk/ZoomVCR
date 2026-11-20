@@ -95,7 +95,7 @@ Der Zoom-Desktop liegt im Compose-Profil `zoom`. Ohne `--profile zoom` startet a
 2. Unter **Mein Konto** ein neues Passwort setzen und den Authenticator einrichten.
 3. `ZOOMVCR_ADMIN_PASSWORD` aus `.env` entfernen.
 4. Zoom-Konto im Rekorder anmelden: [Kapitel 10](10-zoom-desktop.md).
-5. Optional: KI-Dienst eintragen ([Kapitel 7](07-ki-und-benachrichtigung.md)), Kanzlei-Login per OIDC anbinden ([Kapitel 12](12-anmeldung-oidc.md)), Mail einrichten ([Kapitel 11](11-konfiguration.md#mail)).
+5. Optional: KI-Dienst eintragen ([Kapitel 7](07-ki-und-benachrichtigung.md)), die zentrale Anmeldung (SSO) per OIDC anbinden ([Kapitel 12](12-anmeldung-oidc.md)), Mail einrichten ([Kapitel 11](11-konfiguration.md#mail)).
 6. Eine **Testaufnahme** planen und prüfen, ob sie nach wenigen Minuten auf **Fertig** steht ([Kapitel 2](02-erste-schritte.md#ihr-erster-ablauf-eine-testaufnahme)).
 7. Konten für das Team anlegen ([Kapitel 6](06-benutzer-und-rechte.md#konten-verwalten)).
 

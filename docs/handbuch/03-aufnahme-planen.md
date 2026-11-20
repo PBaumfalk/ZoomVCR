@@ -19,7 +19,7 @@
 
 ### Beispiel
 
-Die Kanzlei hat per E-Mail eine Einladung zum Webinar „Urlaubsrecht aktuell“ am Donnerstag um 14 Uhr bekommen, zwei Stunden, mit Zoom-Link. Der Veranstalter hat die Aufzeichnung für den internen Gebrauch auf Nachfrage per E-Mail erlaubt. So sieht der Dialog aus (alle Angaben erfunden):
+Sie haben per E-Mail eine Einladung zum Webinar „Urlaubsrecht aktuell“ am Donnerstag um 14 Uhr bekommen, zwei Stunden, mit Zoom-Link. Der Veranstalter hat die Aufzeichnung für den internen Gebrauch auf Nachfrage per E-Mail erlaubt. So sieht der Dialog aus (alle Angaben erfunden):
 
 | Feld | Eingabe |
 | --- | --- |
@@ -27,14 +27,14 @@ Die Kanzlei hat per E-Mail eine Einladung zum Webinar „Urlaubsrecht aktuell“
 | Zoom-Link | `https://us06web.zoom.us/j/81234567890?pwd=Beispiel` (aus der Einladung kopiert) |
 | Beginn | Donnerstag, 14:00 |
 | Dauer in Minuten | `120` |
-| Name in Zoom | `Kanzlei Muster – Aufzeichnung` |
+| Name in Zoom | `Muster GmbH – Aufzeichnung` |
 | Berechtigung | Schriftliche Freigabe |
 | Nachweis | `E-Mail der Akademie vom 12.11.2026, Betreff „Aufzeichnung Webinar“` |
 | Haken | gesetzt |
 
 Nach **Planen** steht die Aufnahme in der Übersicht unter **Als Nächstes** mit Datum, Uhrzeit und Länge. Der Rekorder tritt um 13:55 bei und nimmt bis 16:15 auf.
 
-Wer **planen** darf (Rolle Rekorder), bestätigt mit dem Haken die Berechtigung; die Entscheidung, ob aufgezeichnet werden darf, trifft die Anwältin oder der Anwalt vorher ([Kapitel 8](08-datenschutz-und-recht.md#vor-der-aufnahme)).
+Wer **planen** darf (Rolle Rekorder), bestätigt mit dem Haken die Berechtigung; die Entscheidung, ob aufgezeichnet werden darf, trifft vorher, wer in Ihrer Organisation dafür zuständig ist ([Kapitel 8](08-datenschutz-und-recht.md#vor-der-aufnahme)).
 
 Unter **Weitere Optionen** lässt sich die Quelle auf **Testaufnahme** umstellen. Das erzeugt ohne Zoom einen kurzen künstlichen Mitschnitt mit drei Folien, nützlich nach Updates.
 
